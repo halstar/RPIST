@@ -1,0 +1,11 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="control_area_width">230dp</dimen>
+    <dimen name="control_area_height">230dp</dimen>
+    <dimen name="view_area_width">380dp</dimen>
+    <dimen name="view_area_height">260dp</dimen>
+    <dimen name="view_area_marginStart_land">16dp</dimen>
+    <dimen name="view_area_marginStart_port">6dp</dimen>
+    <dimen name="view_area_marginLeft">16dp</dimen>
+    <dimen name="view_area_marginTop">72dp</dimen>
+</resources>

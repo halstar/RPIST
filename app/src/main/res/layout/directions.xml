@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/directionsLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_anchor="@+id/constraintLayout2"
+    app:layout_anchorGravity="center">
+
+
+    <ImageButton
+        android:id="@+id/forward2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:background="@null"
+        android:contentDescription="@string/f2"
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        android:tint="@color/tint_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/f2" />
+
+    <ImageButton
+        android:id="@+id/forward1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:contentDescription="@string/f1"
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        android:tint="@color/tint_icon"
+        app:layout_constraintEnd_toEndOf="@+id/forward2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/forward2"
+        app:layout_constraintTop_toBottomOf="@+id/forward2"
+        app:srcCompat="@drawable/f1" />
+
+    <ImageButton
+        android:id="@+id/backward1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@null"
+        android:contentDescription="@string/b1"
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        android:tint="@color/tint_icon"
+        app:layout_constraintEnd_toEndOf="@+id/forward1"
+        app:layout_constraintStart_toStartOf="@+id/forward1"
+        app:layout_constraintTop_toBottomOf="@+id/forward1"
+        app:srcCompat="@drawable/b1" />
+
+    <ImageButton
+        android:id="@+id/backward2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:contentDescription="@string/b2"
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        android:tint="@color/tint_icon"
+        app:layout_constraintEnd_toEndOf="@+id/backward1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/backward1"
+        app:layout_constraintTop_toBottomOf="@+id/backward1"
+        app:srcCompat="@drawable/b2" />
+
+    <ImageButton
+        android:id="@+id/left1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:background="@null"
+        android:contentDescription="@string/l1"
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        android:src="@drawable/l1"
+        android:tint="@color/tint_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/backward1"
+        app:layout_constraintEnd_toStartOf="@+id/forward1"
+        app:layout_constraintTop_toBottomOf="@+id/forward2" />
+
+    <ImageButton
+        android:id="@+id/left2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:background="@null"
+        android:contentDescription="@string/l2"
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        android:tint="@color/tint_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/left1"
+        app:layout_constraintEnd_toStartOf="@+id/left1"
+        app:layout_constraintTop_toTopOf="@+id/left1"
+        app:srcCompat="@drawable/l2" />
+
+    <ImageButton
+        android:id="@+id/right1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@null"
+        android:contentDescription="@string/r1"
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        android:src="@drawable/r1"
+        android:tint="@color/tint_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/backward1"
+        app:layout_constraintStart_toEndOf="@+id/forward1"
+        app:layout_constraintTop_toBottomOf="@+id/forward2" />
+
+    <ImageButton
+        android:id="@+id/right2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@null"
+        android:contentDescription="@string/r2"
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        android:tint="@color/tint_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/right1"
+        app:layout_constraintStart_toEndOf="@+id/right1"
+        app:layout_constraintTop_toTopOf="@+id/right1"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/r2" />
+
+    <ImageButton
+        android:id="@+id/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:contentDescription="@string/Stop"
+        android:duplicateParentState="true"
+        android:padding="10dp"
+        android:tint="@color/tint_icon"
+        app:layout_constraintBottom_toTopOf="@+id/backward1"
+        app:layout_constraintEnd_toStartOf="@+id/right2"
+        app:layout_constraintStart_toEndOf="@+id/left2"
+        app:layout_constraintTop_toBottomOf="@+id/forward1"
+        app:srcCompat="@drawable/pause" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

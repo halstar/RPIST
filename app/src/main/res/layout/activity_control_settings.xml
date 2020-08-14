@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ControlRobot">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/camera_port_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/camera_port"
+            app:layout_constraintBottom_toBottomOf="@+id/camera_port"
+            app:layout_constraintEnd_toEndOf="@+id/robot_address_title"
+            app:layout_constraintTop_toTopOf="@+id/camera_port" />
+
+        <TextView
+            android:id="@+id/robot_address_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="@string/robot_address"
+            app:layout_constraintBottom_toBottomOf="@+id/robot_address"
+            app:layout_constraintEnd_toStartOf="@+id/robot_address"
+            app:layout_constraintTop_toTopOf="@+id/robot_address" />
+
+        <TextView
+            android:id="@+id/commands_port_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/commands_port"
+            app:layout_constraintBottom_toBottomOf="@+id/commands_port"
+            app:layout_constraintEnd_toEndOf="@+id/camera_port_title"
+            app:layout_constraintTop_toTopOf="@+id/commands_port" />
+
+        <TextView
+            android:id="@+id/data_port_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/data_port"
+            app:layout_constraintBottom_toBottomOf="@+id/data_port"
+            app:layout_constraintEnd_toEndOf="@+id/commands_port_title"
+            app:layout_constraintTop_toTopOf="@+id/data_port" />
+
+        <EditText
+            android:id="@+id/robot_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="240dp"
+            android:layout_marginEnd="76dp"
+            android:autofillHints=""
+            android:hint="@string/hint_robot_address"
+            android:inputType="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute" />
+
+        <EditText
+            android:id="@+id/camera_port"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:hint="@string/hint_camera_port"
+            android:inputType="none"
+            app:layout_constraintEnd_toEndOf="@+id/robot_address"
+            app:layout_constraintStart_toStartOf="@+id/robot_address"
+            app:layout_constraintTop_toBottomOf="@+id/robot_address"
+            tools:ignore="UnusedAttribute" />
+
+        <EditText
+            android:id="@+id/commands_port"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:hint="@string/hint_commands_port"
+            android:inputType="none"
+            app:layout_constraintEnd_toEndOf="@+id/camera_port"
+            app:layout_constraintStart_toStartOf="@+id/camera_port"
+            app:layout_constraintTop_toBottomOf="@+id/camera_port"
+            tools:ignore="UnusedAttribute" />
+
+        <EditText
+            android:id="@+id/data_port"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:hint="@string/hint_commands_port"
+            android:inputType="none"
+            app:layout_constraintEnd_toEndOf="@+id/commands_port"
+            app:layout_constraintStart_toStartOf="@+id/commands_port"
+            app:layout_constraintTop_toBottomOf="@+id/commands_port"
+            tools:ignore="UnusedAttribute" />
+
+        <Button
+            android:id="@+id/okButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/OkButton"
+            app:layout_constraintBottom_toBottomOf="@+id/cancelButton"
+            app:layout_constraintEnd_toStartOf="@+id/cancelButton"
+            app:layout_constraintTop_toTopOf="@+id/cancelButton" />
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/CancelButton"
+            app:layout_constraintEnd_toEndOf="@+id/data_port"
+            app:layout_constraintTop_toBottomOf="@+id/data_port" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
