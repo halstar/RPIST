@@ -240,7 +240,7 @@ class Renderer extends Thread implements TextureView.SurfaceTextureListener {
             }
 
             if (mode == ControlRobot.DisplayMode.SCAN_2D) {
-                tank.draw(vpMatrix, true);
+                tank.draw(vpMatrix, false);
             } else {
                 tank.draw  (vpMatrix, false);
                 ground.draw(vpMatrix);

@@ -761,7 +761,7 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Nothing to do 
+        // Nothing to do
         return;
     }
 
