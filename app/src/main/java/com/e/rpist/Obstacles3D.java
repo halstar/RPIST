@@ -36,7 +36,7 @@ public class Obstacles3D {
     private Lock      lock;
 
     private final int   coordsPerVertex = 3;
-    private int         vertexCount     = 360 * 360;
+    private int         vertexCount     = 362 * 362;
     private FloatBuffer vertexBuffer;
 
     public Obstacles3D(float inputColor[]) {

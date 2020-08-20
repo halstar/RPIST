@@ -43,6 +43,9 @@ public class ObstaclesLive {
     private int   mvpMatrixHandle;
     private float fov;
     private Lock  lock;
+    private int   secondLastSetAzimuth, lastSetAzimuth;
+
+
 
     private static final float textureCoords[] = {
             // Top
@@ -184,9 +187,18 @@ public class ObstaclesLive {
 
         for (int i = 0; i < verticesPerAzimuth; i++) {
             for (int j = 0; j < obstacleCoordsPerVertex; j++) {
+                obstacleVertexBuffer.put(secondLastSetAzimuth * obstacleCoordsPerVertex * verticesPerAzimuth + i * obstacleCoordsPerVertex + j, 0.0f);
+            }
+        }
+
+        for (int i = 0; i < verticesPerAzimuth; i++) {
+            for (int j = 0; j < obstacleCoordsPerVertex; j++) {
                 obstacleVertexBuffer.put(azimuth * obstacleCoordsPerVertex * verticesPerAzimuth + i * obstacleCoordsPerVertex + j, positionnedCoords[i * obstacleCoordsPerVertex + j]);
             }
         }
+
+        secondLastSetAzimuth = lastSetAzimuth;
+        lastSetAzimuth       = azimuth;
 
         lock.unlock();
     }

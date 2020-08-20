@@ -38,7 +38,7 @@ public class Obstacles2D {
 
     private final int   coordsPerVertex    =   4;
     private final int   verticesPerAzimuth =   6;
-    private final int   vertexCount        = 360 * verticesPerAzimuth;
+    private final int   vertexCount        = 362 * verticesPerAzimuth;
     private FloatBuffer vertexBuffer;
 
     public Obstacles2D(float inputColor[], float inputFov) {
