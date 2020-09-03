@@ -228,6 +228,23 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    private void startLive3dDisplayMode() {
+
+        queueCommand(stopString  );
+        queueCommand(live3dString);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            // Nothing to do
+        }
+        cameraView.loadUrl("about:blank");
+        imageView.setVisibility  (View.INVISIBLE);
+        cameraView.setVisibility (View.INVISIBLE);
+        textureView.setVisibility(View.VISIBLE  );
+        renderer.setMode(DisplayMode.LIVE_3D);
+        renderer.clearData();
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -370,13 +387,13 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
                         requestedMode = Mode.AVOID_OBSTACLES;
                         break;
                     case 2:
-                        requestedMode = Mode.FOLLOW_LINE;
+                        requestedMode = Mode.ALONG_OBSTACLE;
                         break;
                     case 3:
                         requestedMode = Mode.FOLLOW_CORRIDOR;
                         break;
                     case 4:
-                        requestedMode = Mode.ALONG_OBSTACLE;
+                        requestedMode = Mode.FOLLOW_LINE;
                         break;
                     default:
                         requestedMode = currentMode;
@@ -400,25 +417,38 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
                             userControlSwitch.setEnabled(false);
                             directionsLayout.setEnabled (false);
                             joystickLayout.setEnabled   (false);
-                            break;
-                        case FOLLOW_LINE:
-                            queueCommand(modeFollowLineString);
-                            userControlSwitch.setEnabled(false);
-                            directionsLayout.setEnabled (false);
-                            joystickLayout.setEnabled   (false);
-                            break;
-                        case FOLLOW_CORRIDOR:
-                            queueCommand(modeFollowCorridorString);
-                            userControlSwitch.setEnabled(false);
-                            directionsLayout.setEnabled (false);
-                            joystickLayout.setEnabled   (false);
+                            displaySwitch.setEnabled    (false);
+                            displaySwitch.setProgress   (2);
+                            startLive3dDisplayMode();
+                            currentDisplay = DisplayMode.LIVE_3D;
                             break;
                         case ALONG_OBSTACLE:
                             queueCommand(modeAlongObstacleString);
                             userControlSwitch.setEnabled(false);
                             directionsLayout.setEnabled (false);
                             joystickLayout.setEnabled   (false);
+                            displaySwitch.setProgress   (2);
+                            startLive3dDisplayMode();
+                            currentDisplay = DisplayMode.LIVE_3D;
                             break;
+                        case FOLLOW_CORRIDOR:
+                            queueCommand(modeFollowCorridorString);
+                            userControlSwitch.setEnabled(false);
+                            directionsLayout.setEnabled (false);
+                            joystickLayout.setEnabled   (false);
+                            displaySwitch.setEnabled    (false);
+                            displaySwitch.setProgress   (2);
+                            startLive3dDisplayMode();
+                            currentDisplay = DisplayMode.LIVE_3D;
+                            break;
+                        case FOLLOW_LINE:
+                            queueCommand(modeFollowLineString);
+                            userControlSwitch.setEnabled(false);
+                            directionsLayout.setEnabled (false);
+                            joystickLayout.setEnabled   (false);
+                            displaySwitch.setEnabled    (false);
+                            break;
+
                         default:
                             // Nothing to do
                             break;
@@ -557,19 +587,7 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
                             textureView.setVisibility(View.INVISIBLE);
                             break;
                         case LIVE_3D:
-                            queueCommand(stopString  );
-                            queueCommand(live3dString);
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException e) {
-                                // Nothing to do
-                            }
-                            cameraView.loadUrl("about:blank");
-                            imageView.setVisibility  (View.INVISIBLE);
-                            cameraView.setVisibility (View.INVISIBLE);
-                            textureView.setVisibility(View.VISIBLE  );
-                            renderer.setMode(DisplayMode.LIVE_3D);
-                            renderer.clearData();
+                            startLive3dDisplayMode();
                             break;
                         case SCAN_2D:
                             queueCommand(stopString     );

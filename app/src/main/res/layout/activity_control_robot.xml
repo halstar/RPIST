@@ -108,12 +108,12 @@
                     app:srcCompat="@drawable/mode_avoid_obstacles" />
 
                 <ImageView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textView5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    app:srcCompat="@drawable/mode_follow_line" />
+                    app:srcCompat="@drawable/mode_along_obstacle" />
 
                 <ImageView
                     android:id="@+id/textView4"
@@ -124,12 +124,12 @@
                     app:srcCompat="@drawable/mode_follow_corridor" />
 
                 <ImageView
-                    android:id="@+id/textView5"
+                    android:id="@+id/textView3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    app:srcCompat="@drawable/mode_along_obstacle" />
+                    app:srcCompat="@drawable/mode_follow_line" />
 
             </TableRow>
 

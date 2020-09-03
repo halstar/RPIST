@@ -117,7 +117,7 @@ public class ObstaclesLive {
 
     private final int   obstacleCoordsPerVertex =   4;
     private final int   verticesPerAzimuth      = obstacleCoords.length / obstacleCoordsPerVertex;
-    private final int   obstacleVertexCount     = 360 * verticesPerAzimuth;
+    private final int   obstacleVertexCount     = 362 * verticesPerAzimuth;
 
     private FloatBuffer textureVertexBuffer;
     private FloatBuffer obstacleVertexBuffer;
@@ -156,7 +156,7 @@ public class ObstaclesLive {
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
 
-        for (int a = 0; a < 360; a++) {
+        for (int a = 0; a < 362; a++) {
             for (int i = 0; i < verticesPerAzimuth; i++) {
                 for (int j = 0; j < textureCoordsPerVertex; j++) {
                     textureVertexBuffer.put(a * textureCoordsPerVertex * verticesPerAzimuth + i * textureCoordsPerVertex + j, textureCoords[i * textureCoordsPerVertex + j]);
