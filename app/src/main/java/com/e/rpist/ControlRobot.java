@@ -228,6 +228,20 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    private void startCameraDisplayMode() {
+
+        queueCommand(displayCameraString);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            // Nothing to do
+        }
+        cameraView.loadUrl("http://" + robotAddress + ":" + cameraPort);
+        imageView.setVisibility  (View.INVISIBLE);
+        cameraView.setVisibility (View.VISIBLE  );
+        textureView.setVisibility(View.INVISIBLE);
+    }
+
     private void startLive3dDisplayMode() {
 
         queueCommand(stopString  );
@@ -447,6 +461,9 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
                             directionsLayout.setEnabled (false);
                             joystickLayout.setEnabled   (false);
                             displaySwitch.setEnabled    (false);
+                            displaySwitch.setProgress   (3);
+                            startCameraDisplayMode();
+                            currentDisplay = DisplayMode.CAMERA;
                             break;
 
                         default:
@@ -575,16 +592,7 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
                             textureView.setVisibility(View.INVISIBLE);
                             break;
                         case CAMERA:
-                            queueCommand(displayCameraString);
-                            try {
-                                Thread.sleep(500);
-                            } catch (InterruptedException e) {
-                                // Nothing to do
-                            }
-                            cameraView.loadUrl("http://" + robotAddress + ":" + cameraPort);
-                            imageView.setVisibility  (View.INVISIBLE);
-                            cameraView.setVisibility (View.VISIBLE  );
-                            textureView.setVisibility(View.INVISIBLE);
+                            startCameraDisplayMode();
                             break;
                         case LIVE_3D:
                             startLive3dDisplayMode();
