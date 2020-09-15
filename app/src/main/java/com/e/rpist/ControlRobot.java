@@ -51,28 +51,29 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
     public final  static String EXTRA_COMMANDS_PORT = "com.e.rpist.commands.port";
     public final  static String EXTRA_DATA_PORT     = "com.e.rpist.data.port"    ;
 
-    private final static String forward1String           = "F1";
-    private final static String forward2String           = "F2";
-    private final static String backward1String          = "B1";
-    private final static String backward2String          = "B2";
-    private final static String left1String              = "L1";
-    private final static String left2String              = "L2";
-    private final static String right1String             = "R1";
-    private final static String right2String             = "R2";
-    private final static String stopString               = "S";
-    private final static String modeUserControlString    = "MU";
-    private final static String modeAvoidObstaclesString = "MO";
-    private final static String modeFollowLineString     = "ML";
-    private final static String modeFollowCorridorString = "MC";
-    private final static String modeAlongObstacleString  = "MA";
-    private final static String controlDirectionsString  = "CD";
-    private final static String controlJoystickString    = "CJ";
-    private final static String controlSensorsString     = "CS";
-    private final static String displayOffString         = "DO";
-    private final static String displayCameraString      = "DC";
-    private final static String display2dString          = "D2";
-    private final static String display3dString          = "D3";
-    private final static String live3dString             = "L3";
+    private final static String forward1String            = "F1";
+    private final static String forward2String            = "F2";
+    private final static String backward1String           = "B1";
+    private final static String backward2String           = "B2";
+    private final static String left1String               = "L1";
+    private final static String left2String                = "L2";
+    private final static String right1String              = "R1";
+    private final static String right2String              = "R2";
+    private final static String stopString                = "S";
+    private final static String modeUserControlString     = "MU";
+    private final static String modeAvoidObstaclesString  = "MO";
+    private final static String modeFollowLineString      = "ML";
+    private final static String modeFollowCorridorString  = "MC";
+    private final static String modeAlongObstacleString   = "MA";
+    private final static String controlDirectionsString   = "CD";
+    private final static String controlJoystickString     = "CJ";
+    private final static String controlSensorsString      = "CS";
+    private final static String displayOffString          = "DO";
+    private final static String displayCameraString       = "DC";
+    private final static String display2dString           = "D2";
+    private final static String display3dString           = "D3";
+    private final static String live3dString              = "L3";
+    private final static String followCorridorUTurnString = "UT";
 
     private enum Mode {
         USER_CONTROL,
@@ -431,7 +432,7 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
                             userControlSwitch.setEnabled(false);
                             directionsLayout.setEnabled (false);
                             joystickLayout.setEnabled   (false);
-                            displaySwitch.setEnabled    (false);
+                            displaySwitch.setEnabled    (true );
                             displaySwitch.setProgress   (2);
                             startLive3dDisplayMode();
                             currentDisplay = DisplayMode.LIVE_3D;
@@ -441,6 +442,7 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
                             userControlSwitch.setEnabled(false);
                             directionsLayout.setEnabled (false);
                             joystickLayout.setEnabled   (false);
+                            displaySwitch.setEnabled    (true );
                             displaySwitch.setProgress   (2);
                             startLive3dDisplayMode();
                             currentDisplay = DisplayMode.LIVE_3D;
@@ -450,7 +452,7 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
                             userControlSwitch.setEnabled(false);
                             directionsLayout.setEnabled (false);
                             joystickLayout.setEnabled   (false);
-                            displaySwitch.setEnabled    (false);
+                            displaySwitch.setEnabled    (true );
                             displaySwitch.setProgress   (2);
                             startLive3dDisplayMode();
                             currentDisplay = DisplayMode.LIVE_3D;
@@ -472,6 +474,8 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
                     }
 
                     currentMode = requestedMode;
+                } else if (requestedMode == Mode.FOLLOW_CORRIDOR) {
+                    queueCommand(followCorridorUTurnString);
                 }
             }
         });
