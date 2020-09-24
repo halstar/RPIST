@@ -221,7 +221,7 @@ public class ControlRobot extends AppCompatActivity implements SensorEventListen
         public boolean onScale(ScaleGestureDetector detector) {
 
             scalingFactor /= detector.getScaleFactor();
-            scalingFactor  = Math.max(0.6f, Math.min(scalingFactor, 10.0f));
+            scalingFactor  = Math.max(0.55f, Math.min(scalingFactor, 10.0f));
 
             renderer.setScalingFactor(scalingFactor);
 

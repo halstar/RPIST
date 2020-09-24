@@ -9,16 +9,18 @@ import android.opengl.EGLSurface;
 
 class Renderer extends Thread implements TextureView.SurfaceTextureListener {
 
-    private static final float clearColor2d   [] = {0.20f, 0.20f, 0.20f, 1.0f};
-    private static final float clearColor3d   [] = {0.31f, 0.40f, 0.49f, 1.0f};
-    private static final float clearColorLive [] = {0.60f, 0.78f, 0.95f, 1.0f};
-    private static final float obstacleColor2d[] = {0.37f, 0.37f, 0.29f, 1.0f};
-    private static final float obstacleColor3d[] = {1.00f, 1.00f, 1.00f, 1.0f};
-    private static final float xArrowColor    [] = {1.00f, 0.00f, 0.00f, 1.0f};
-    private static final float yArrowColor    [] = {0.00f, 1.00f, 0.00f, 1.0f};
-    private static final float zArrowColor    [] = {0.00f, 0.00f, 1.00f, 1.0f};
-    private static final float tankBodyColor  [] = {0.00f, 0.00f, 1.00f, 1.0f};
-    private static final float groundColor    [] = {0.37f, 0.37f, 0.29f, 1.0f};
+    private static final float clearColor2d          [] = {0.20f, 0.20f, 0.20f, 1.0f};
+    private static final float clearColor3d          [] = {0.31f, 0.40f, 0.49f, 1.0f};
+    private static final float clearColorLive        [] = {0.60f, 0.78f, 0.95f, 1.0f};
+    private static final float obstacleColor2dSafe   [] = {0.00f, 0.80f, 0.00f, 1.0f};
+    private static final float obstacleColor2dWarning[] = {0.80f, 0.80f, 0.00f, 1.0f};
+    private static final float obstacleColor2dDanger [] = {0.80f, 0.00f, 0.00f, 1.0f};
+    private static final float obstacleColor3d       [] = {1.00f, 1.00f, 1.00f, 1.0f};
+    private static final float xArrowColor           [] = {1.00f, 0.00f, 0.00f, 1.0f};
+    private static final float yArrowColor           [] = {0.00f, 1.00f, 0.00f, 1.0f};
+    private static final float zArrowColor           [] = {0.00f, 0.00f, 1.00f, 1.0f};
+    private static final float tankBodyColor         [] = {0.00f, 0.00f, 1.00f, 1.0f};
+    private static final float groundColor           [] = {0.37f, 0.37f, 0.29f, 1.0f};
 
     private static final float obstacleFov = 5.0f;
 
@@ -171,7 +173,7 @@ class Renderer extends Thread implements TextureView.SurfaceTextureListener {
             yArrow = new Arrow(yArrowColor);
             zArrow = new Arrow(zArrowColor);
 
-            obstacles2D   = new Obstacles2D  (obstacleColor2d, obstacleFov);
+            obstacles2D   = new Obstacles2D  (obstacleColor2dSafe, obstacleColor2dWarning, obstacleColor2dDanger, obstacleFov);
             obstacles3D   = new Obstacles3D  (obstacleColor3d);
             obstaclesLive = new ObstaclesLive(context, obstacleFov);
 

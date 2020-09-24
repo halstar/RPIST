@@ -14,24 +14,27 @@ public class Obstacles2D {
     private final String vertexShaderCode =
             "uniform   mat4 u_mvpMatrix;              \n" +
             "attribute vec4 a_position;               \n" +
+            "attribute vec4 a_color;                  \n" +
+            "varying   vec4 v_color;                  \n" +
             "                                         \n" +
             "void main() {                            \n" +
+            "  v_color     = a_color;                 \n" +
             "  gl_Position = u_mvpMatrix * a_position;\n" +
             "}                                        \n";
 
     private final String fragmentShaderCode =
             "precision mediump float; \n" +
-            "uniform vec4 u_color;    \n" +
+            "varying vec4 v_color;    \n" +
             "                         \n" +
             "void main() {            \n" +
-            "  gl_FragColor = u_color;\n" +
+            "  gl_FragColor = v_color;\n" +
             "}                        \n";
 
     private final int eglProgram;
     private int       positionHandle;
     private int       mvpMatrixHandle;
     private int       colorHandle;
-    private float     color[];
+    private float     colorSafe[], colorWarning[], colorDanger[];
     private float     fov;
     private Lock      lock;
     private int       secondLastSetAzimuth, lastSetAzimuth;
@@ -40,12 +43,15 @@ public class Obstacles2D {
     private final int   verticesPerAzimuth =   6;
     private final int   vertexCount        = 362 * verticesPerAzimuth;
     private FloatBuffer vertexBuffer;
+    private FloatBuffer colorBuffer;
 
-    public Obstacles2D(float inputColor[], float inputFov) {
+    public Obstacles2D(float inputColorSafe[], float inputColorWarning[], float inputColorDanger[], float inputFov) {
 
-        color = inputColor;
-        fov   = inputFov;
-        lock  = new ReentrantLock();
+        colorSafe    = inputColorSafe;
+        colorWarning = inputColorWarning;
+        colorDanger  = inputColorDanger;
+        fov          = inputFov;
+        lock         = new ReentrantLock();
 
         int vertexShader   = Renderer.loadShader(GLES20.GL_VERTEX_SHADER  , vertexShaderCode  );
         int fragmentShader = Renderer.loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode);
@@ -57,10 +63,11 @@ public class Obstacles2D {
         GLES20.glLinkProgram (eglProgram);
 
         positionHandle  = GLES20.glGetAttribLocation (eglProgram, "a_position" );
-        colorHandle     = GLES20.glGetUniformLocation(eglProgram, "u_color"    );
+        colorHandle     = GLES20.glGetAttribLocation (eglProgram, "a_color"    );
         mvpMatrixHandle = GLES20.glGetUniformLocation(eglProgram, "u_mvpMatrix");
 
         vertexBuffer = ByteBuffer.allocateDirect(vertexCount * coordsPerVertex * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
+        colorBuffer  = ByteBuffer.allocateDirect(vertexCount * coordsPerVertex * 4).order(ByteOrder.nativeOrder()).asFloatBuffer();
 
         clear();
     }
@@ -71,6 +78,15 @@ public class Obstacles2D {
         float[] coords        = new float[coordsPerVertex * verticesPerAzimuth];
         float[] rotatedCoords = new float[coordsPerVertex * verticesPerAzimuth];
         float   width         = (float)(2 * distance * Math.tan(Math.toRadians(fov / 2)));
+        float[] color;
+
+        if (distance > 0.80f) {
+            color = colorSafe;
+        } else if (distance > 0.35f) {
+            color = colorWarning;
+        } else {
+            color = colorDanger;
+        }
 
         // Upper part
         coords[0] = 0.0f    ; coords[1] = 0.0f        ; coords[2]  = 0.0f; coords[3]  = 1.0f;
@@ -93,6 +109,7 @@ public class Obstacles2D {
         for (int i = 0; i < verticesPerAzimuth; i++) {
             for (int j = 0; j < coordsPerVertex; j++) {
                 vertexBuffer.put(azimuth * coordsPerVertex * verticesPerAzimuth + i * coordsPerVertex + j, rotatedCoords[i * coordsPerVertex + j]);
+                colorBuffer.put (azimuth * coordsPerVertex * verticesPerAzimuth + i * coordsPerVertex + j, color[j]);
             }
         }
 
@@ -109,9 +126,11 @@ public class Obstacles2D {
         for (int i = 0; i < vertexCount; i++) {
             for (int j = 0; j < coordsPerVertex; j++) {
                 vertexBuffer.put(i * coordsPerVertex + j, 0.0f);
+                colorBuffer.put (i * coordsPerVertex + j, 0.0f);
             }
         }
         vertexBuffer.position(0);
+        colorBuffer.position (0);
 
         lock.unlock();
     }
@@ -119,8 +138,6 @@ public class Obstacles2D {
     public void draw(float[] mvpMatrix) {
 
         GLES20.glUseProgram  (eglProgram);
-
-        GLES20.glUniform4fv(colorHandle, 1, color, 0);
 
         GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0);
 
@@ -137,9 +154,13 @@ public class Obstacles2D {
         GLES20.glEnableVertexAttribArray(positionHandle);
         GLES20.glVertexAttribPointer    (positionHandle, coordsPerVertex, GLES20.GL_FLOAT, false, 0, vertexBuffer);
 
+        GLES20.glEnableVertexAttribArray(colorHandle);
+        GLES20.glVertexAttribPointer    (colorHandle, coordsPerVertex, GLES20.GL_FLOAT, false, 0, colorBuffer  );
+
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexCount);
 
         GLES20.glDisableVertexAttribArray(positionHandle);
+        GLES20.glDisableVertexAttribArray(colorHandle   );
 
         lock.unlock();
     }
